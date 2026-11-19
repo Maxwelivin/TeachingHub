@@ -10,6 +10,7 @@ node scripts/validate.mjs              # 資料格式、憑證掃描、儲存與
 python -X utf8 tests/run_tests.py      # 瀏覽器測試（含連到 Microsoft 的實測，約 3 分鐘）
 python -X utf8 tests/run_tests.py --no-live   # 只跑不需連外的測試
 python -X utf8 tests/run_tests.py -k 搜尋      # 只跑名稱含「搜尋」的測試
+python -X utf8 tests/run_tests.py --base https://maxwelivin.github.io/TeachingHub   # 對正式網站跑
 ```
 
 - 每項測試都用全新、未登入的瀏覽器狀態（等同無痕視窗）。

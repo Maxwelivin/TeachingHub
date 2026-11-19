@@ -17,6 +17,8 @@ GitHub Pages（本站）── presentations.json ────┘
 | PowerPoint 網頁版 | 簡報渲染、動畫、轉場 |
 | `data/presentations.json` | 簡報索引（科目、年級、冊別、章節、連結） |
 
+網址：<https://maxwelivin.github.io/TeachingHub/>
+
 修改既有簡報**不需要**重新部署網站；只有新增簡報時要更新 JSON。
 
 ## 文件
@@ -48,7 +50,7 @@ assets/icons/         favicon
 data/presentations.json  簡報索引
 scripts/validate.mjs  部署前檢查（無需安裝套件）
 tests/run_tests.py    Playwright 瀏覽器測試
-.github/workflows/pages.yml  push 到 main 後自動檢查並部署
+docs/pages-workflow.yml  部署前自動檢查的 Actions 設定（待啟用，見 SETUP.md 第 6 節）
 ```
 
 ## 本機預覽

@@ -82,7 +82,22 @@
 
 ## 6. 部署到 GitHub Pages
 
-本專案已設定 GitHub Actions：push 到 `main` 分支就自動檢查並部署。
+網站網址：<https://maxwelivin.github.io/TeachingHub/>
+
+目前的部署方式是「**從 main 分支直接發布**」：push 到 `main` 後約 1 分鐘網站就會更新。**這個模式不會自動檢查 JSON**，所以 push 前請先在本機跑 `node scripts/validate.mjs`（或用小幫手產生資料，比較不會出錯）。
+
+**（建議）改成「自動檢查通過才部署」**：`docs/pages-workflow.yml` 是已寫好的 GitHub Actions 設定，JSON 格式錯誤或含憑證時會擋下部署。目前電腦上的 GitHub 登入缺少 `workflow` 權限，所以還沒啟用。要啟用時，在自己的電腦執行：
+
+```powershell
+C:\Users\S5\bin\ghcli\bin\gh.exe auth refresh -h github.com -s workflow   # 依畫面指示在瀏覽器授權
+cd C:\Claude\Web\TeachingHub
+mkdir .github\workflows
+git mv docs/pages-workflow.yml .github/workflows/pages.yml
+git commit -m "啟用部署前自動檢查"
+git push
+```
+
+然後到 repo 的 Settings → Pages → Build and deployment → Source 改成「**GitHub Actions**」。之後部署進度在「Actions」分頁看，綠勾代表完成。
 
 **改 JSON 的三種方式（擇一）：**
 
@@ -96,9 +111,6 @@
   ```
 - **GitHub Desktop**：開啟本資料夾 → Commit → Push。
 
-部署進度在 repo 的「Actions」分頁看；綠勾代表完成。
-
-**第一次設定（只做一次，已由 Claude 完成的話可略過）：** repo 的 Settings → Pages → Build and deployment → Source 選「**GitHub Actions**」。
 
 > 注意：GitHub Pages 免費版需要**公開** repo。本站所有內容（含簡報連結）本來就視為公開資訊，請勿在 repo 放任何私人資料。
 
@@ -119,8 +131,8 @@ python -m http.server 8000
 | 出現 Microsoft 登入畫面 | 這份簡報在學校／公司帳號的 OneDrive，或連結沒設成「任何人」。改用個人 OneDrive 並重新產生內嵌程式碼。**不要在教室電腦登入。** |
 | 播放頁顯示「播放連結不是 OneDrive／PowerPoint 網頁版的網址」 | `embedUrl` 貼錯（例如貼成 Google 雲端或其他網站）。只接受 `onedrive.live.com`、`1drv.ms`、`*.officeapps.live.com`、`*.sharepoint.com`。 |
 | 首頁卡片顯示「這份簡報還沒有設定播放連結」 | `embedUrl` 是空的，填入內嵌網址。 |
-| 首頁顯示「簡報清單載入失敗」 | `presentations.json` 格式錯誤（常見：少逗號、多逗號、引號是全形）。跑 `node scripts/validate.mjs` 看錯在哪；GitHub Actions 也會擋下錯誤的版本。 |
-| 新增的簡報沒出現 | 確認 Actions 已綠勾；GitHub Pages 有快取，等 1–10 分鐘或按 Ctrl+F5。 |
+| 首頁顯示「簡報清單載入失敗」 | `presentations.json` 格式錯誤（常見：少逗號、多逗號、引號是全形）。跑 `node scripts/validate.mjs` 看錯在哪；啟用 Actions 後也會自動擋下錯誤的版本。 |
+| 新增的簡報沒出現 | 確認 push 成功（啟用 Actions 後則看 Actions 是否綠勾）；GitHub Pages 有快取，等 1–10 分鐘或按 Ctrl+F5。 |
 | 改了 PPT 但播放的是舊版 | 確認檔案已同步到 OneDrive（工作列 OneDrive 圖示沒有轉圈）；按「重新載入」。若你是「另存新檔」，要重新產生內嵌程式碼。 |
 | 簡報筆／方向鍵沒反應 | 焦點不在播放器上。用滑鼠點一下投影片，或按本站「全螢幕」（會自動把焦點移進播放器）。 |
 | iPhone 上沒有「全螢幕」按鈕 | iPhone 的 Safari 不支援網頁元素全螢幕，本站因此不顯示這個按鈕。把手機橫放，或用播放器右下角自己的放大按鈕，或按「網頁版開啟」。 |

@@ -23,6 +23,7 @@ from playwright.sync_api import Page, sync_playwright
 ROOT = Path(__file__).resolve().parent.parent
 SHOTS = ROOT / "tests" / "screenshots"
 LIVE = "--no-live" not in sys.argv
+REMOTE = sys.argv[sys.argv.index("--base") + 1].rstrip("/") if "--base" in sys.argv else ""
 ONLY = sys.argv[sys.argv.index("-k") + 1] if "-k" in sys.argv else ""
 
 # Microsoft 在官方部落格公開的範例簡報（OneDrive 個人版、任何人可檢視），只用於測試，不放進正式資料。
@@ -474,6 +475,8 @@ def t_live_iphone(c: Ctx):
 def main():
     SHOTS.mkdir(parents=True, exist_ok=True)
     httpd, base = serve()
+    if REMOTE:
+        base = REMOTE
     with sync_playwright() as pw:
         browser = pw.chromium.launch()
         c = Ctx(browser, base)
