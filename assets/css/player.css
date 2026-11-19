@@ -1,0 +1,182 @@
+/* 播放頁：把畫面盡量留給簡報 */
+html,
+body.player {
+  height: 100%;
+}
+
+body.player {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  overflow: hidden;
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px max(12px, env(safe-area-inset-right)) 8px max(12px, env(safe-area-inset-left));
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.bar-title {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  font-size: 18px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bar-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.stage {
+  position: relative;
+  min-height: 0;
+  background: #000;
+}
+
+.stage iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #000;
+}
+
+.stage:fullscreen {
+  width: 100vw;
+  height: 100vh;
+}
+
+.stage:-webkit-full-screen {
+  width: 100vw;
+  height: 100vh;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 24px;
+  background: #000;
+  color: #e8e8ea;
+  text-align: center;
+}
+
+.overlay[hidden] {
+  display: none;
+}
+
+.overlay p {
+  margin: 0;
+  max-width: 34em;
+}
+
+.overlay .slow {
+  margin-top: 8px;
+  color: #f5d58c;
+}
+
+.overlay.error {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.error-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--danger);
+}
+
+.overlay.error .btn {
+  margin-top: 16px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 8px;
+  border: 4px solid rgb(255 255 255 / 20%);
+  border-top-color: #fff;
+  border-radius: 50%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .spinner {
+    animation: spin 0.9s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.fs-hint {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  z-index: 3;
+  margin: 0;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: rgb(0 0 0 / 75%);
+  color: #fff;
+  font-size: 16px;
+  transform: translateX(-50%);
+  pointer-events: none; /* 不擋住對投影片的點擊 */
+}
+
+.tips {
+  margin: 0;
+  padding: 6px 16px;
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text-2);
+  font-size: 14px;
+  text-align: center;
+}
+
+/* 窄螢幕：按鈕只留圖示 */
+@media (max-width: 860px) {
+  .bar .btn span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .bar .btn {
+    width: 48px;
+    padding: 0;
+  }
+
+  .tips {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 600px) {
+  .bar-title {
+    font-size: 16px;
+  }
+
+  .bar .icon-btn {
+    display: none;
+  }
+}

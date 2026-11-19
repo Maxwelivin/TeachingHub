@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "subjects": [
+    { "id": "jh-physchem", "name": "國中理化" },
+    { "id": "jh-math", "name": "國中數學" },
+    { "id": "sh-physics", "name": "高中物理" }
+  ],
+  "presentations": [
+    {
+      "id": "jhpc-g8a-1-1",
+      "subject": "jh-physchem",
+      "grade": "八年級",
+      "volume": "第三冊（八上）",
+      "chapter": "第 1 章 基本測量",
+      "title": "1-1 長度與體積的測量（範例，尚未設定連結）",
+      "description": "這是範例資料。照 docs/SETUP.md 取得 PowerPoint 內嵌連結後，把 embedUrl 填進來就能播放。",
+      "embedUrl": "",
+      "openUrl": "",
+      "updated": null,
+      "tags": ["範例"]
+    },
+    {
+      "id": "jhmath-g7a-1-1",
+      "subject": "jh-math",
+      "grade": "七年級",
+      "volume": "第一冊（七上）",
+      "chapter": "第 1 章 整數的運算",
+      "title": "1-1 正數與負數（範例，尚未設定連結）",
+      "description": "範例資料，示範數學科的分類方式。",
+      "embedUrl": "",
+      "openUrl": "",
+      "updated": null,
+      "tags": ["範例"]
+    },
+    {
+      "id": "shphy-g10-1",
+      "subject": "sh-physics",
+      "grade": "高一",
+      "volume": "必修物理",
+      "chapter": "第 1 章 科學的態度與方法",
+      "title": "1-1 物理學的範疇（範例，尚未設定連結）",
+      "description": "範例資料，示範高中物理的分類方式。",
+      "embedUrl": "",
+      "openUrl": "",
+      "updated": null,
+      "tags": ["範例"]
+    }
+  ]
+}

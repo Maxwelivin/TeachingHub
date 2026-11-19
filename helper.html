@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; frame-src https://onedrive.live.com https://1drv.ms https://*.officeapps.live.com https://*.sharepoint.com; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>新增簡報小幫手 · TeachingHub</title>
+    <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/helper.css" />
+    <script src="assets/js/theme.js"></script>
+    <script type="module" src="assets/js/helper.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <div class="brand">
+          <h1>新增簡報小幫手</h1>
+          <p>把 PowerPoint 的內嵌程式碼轉成 presentations.json 的一筆資料。所有處理都在這個分頁內完成，不會上傳或儲存。</p>
+        </div>
+        <a class="btn" href="index.html">回首頁</a>
+      </div>
+    </header>
+
+    <main class="wrap helper">
+      <form id="form" class="panel" autocomplete="off">
+        <div class="field full">
+          <label for="h-embed">1. 貼上內嵌程式碼（整段 &lt;iframe …&gt; 或其中的網址）</label>
+          <textarea id="h-embed" rows="4" placeholder='<iframe src="https://onedrive.live.com/embed?..." ...></iframe>'></textarea>
+          <p class="hint" id="h-embed-status"></p>
+        </div>
+        <div class="field full">
+          <label for="h-open">2. 「檢視者」分享連結（選填，播放頁的「網頁版開啟」會用它）</label>
+          <input id="h-open" type="url" placeholder="https://1drv.ms/p/c/..." />
+          <p class="hint" id="h-open-status"></p>
+        </div>
+        <div class="field">
+          <label for="h-subject">科目</label>
+          <select id="h-subject"></select>
+        </div>
+        <div class="field">
+          <label for="h-grade">年級</label>
+          <input id="h-grade" list="dl-grade" placeholder="八年級" />
+        </div>
+        <div class="field">
+          <label for="h-volume">冊別</label>
+          <input id="h-volume" list="dl-volume" placeholder="第三冊（八上）" />
+        </div>
+        <div class="field">
+          <label for="h-chapter">章節</label>
+          <input id="h-chapter" list="dl-chapter" placeholder="第 1 章 基本測量" />
+        </div>
+        <div class="field full">
+          <label for="h-title">簡報名稱</label>
+          <input id="h-title" placeholder="1-1 長度與體積的測量" />
+        </div>
+        <div class="field full">
+          <label for="h-desc">簡報描述</label>
+          <input id="h-desc" placeholder="一句話說明這份簡報的內容" />
+        </div>
+        <div class="field">
+          <label for="h-id">代號 id（英數與 -，不可重複）</label>
+          <input id="h-id" placeholder="jhpc-g8a-1-1" />
+          <p class="hint" id="h-id-status"></p>
+        </div>
+        <div class="field">
+          <label for="h-updated">索引更新日期</label>
+          <input id="h-updated" type="date" />
+        </div>
+        <div class="field">
+          <label for="h-tags">標籤（用逗號分隔）</label>
+          <input id="h-tags" placeholder="實驗, 複習" />
+        </div>
+        <datalist id="dl-grade"></datalist>
+        <datalist id="dl-volume"></datalist>
+        <datalist id="dl-chapter"></datalist>
+      </form>
+
+      <section class="panel">
+        <h2>3. 複製這段，貼進 data/presentations.json 的 "presentations" 清單</h2>
+        <pre id="h-out" class="out"></pre>
+        <div class="row">
+          <button type="button" class="btn btn-primary" id="h-copy">複製</button>
+          <button type="button" class="btn" id="h-preview">試播內嵌連結</button>
+          <span class="hint" id="h-copy-status" aria-live="polite"></span>
+        </div>
+        <p class="hint">貼到清單裡時，前一筆資料的「}」後面要加逗號。存檔後 commit／push，約 1–2 分鐘後網站更新。</p>
+        <div class="preview" id="h-frame-wrap" hidden></div>
+      </section>
+    </main>
+  </body>
+</html>

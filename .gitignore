@@ -1,0 +1,16 @@
+# 測試產物
+tests/screenshots/
+test-results/
+__pycache__/
+_site/
+node_modules/
+
+# 絕不提交任何憑證或私人設定
+.env
+.env.*
+*.pem
+*.key
+*secret*
+*token*
+*.pptx
+*.ppt

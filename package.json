@@ -1,0 +1,9 @@
+{
+  "name": "teachinghub",
+  "private": true,
+  "type": "module",
+  "description": "個人雲端教學簡報平台（GitHub Pages + OneDrive + PowerPoint 網頁版內嵌）",
+  "scripts": {
+    "validate": "node scripts/validate.mjs"
+  }
+}
